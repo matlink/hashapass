@@ -131,6 +131,8 @@ if [ $SHOW ]; then
     zenity --info --text "$result" --title "Hashed Password"
   fi
 fi
-
+echo "Press any key to clear clipboard ..."
+read
+xsel -bc
 
 #zenity --text $result --info #useful as a debugging tool? or for other uses? hmm
