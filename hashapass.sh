@@ -111,7 +111,7 @@ hashapass() {
   if [ $LONG ]; then
     echo $hashed_pass
   else
-    echo $hashed_pass | cut -c 1-8
+    echo $hashed_pass | cut -c 1-10
   fi
 }
 
