@@ -133,6 +133,6 @@ if [ $SHOW ]; then
 fi
 echo "Press any key to clear clipboard ..."
 read
-xsel -bc
+echo -n | xclip -selection clipboard;
 
 #zenity --text $result --info #useful as a debugging tool? or for other uses? hmm
