@@ -41,11 +41,11 @@
 
 
 usage() {
-  echo "Usage:" "hashapass [-l] [-s] [parameter]"
+  echo "Usage:" "hashapass [-l | -L] [-s] [parameter]"
 }
 
 #there is getopt and there is getopts. fml.
-while getopts "hsl" opt; do
+while getopts "hslL" opt; do
 #echo "currently parsing argument '$opt'"
 
 case "$opt" in
@@ -54,6 +54,9 @@ case "$opt" in
   s)
   #echo "SHOW turned on"
   SHOW=true;;
+  L)
+  #echo "VERY long turned on"
+  VERYLONG=true;;
   l)
   #echo "LONG turned on"
   LONG=true;;
@@ -106,10 +109,12 @@ hashapass() {
   parameter=$1
   password=$2
   hashed_pass=$(echo -n $parameter \
-	| openssl dgst -sha256 -binary -hmac $password \
+	| openssl dgst -sha1 -binary -hmac $password \
 	| openssl enc -base64)
-  if [ $LONG ]; then
+  if [ $VERYLONG ]; then
     echo $hashed_pass
+  elif [ $LONG ]; then
+    echo $hashed_pass | cut -c 1-14
   else
     echo $hashed_pass | cut -c 1-10
   fi
